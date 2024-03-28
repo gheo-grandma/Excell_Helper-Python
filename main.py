@@ -1,10 +1,13 @@
 import openpyxl                             # modulo per leggere excel .xlsx (solo questo formato!)
 import dates_operations  as do              # script esterno creato per gestire le date
 import mail                                 # script esterno creato per login ed invio della email
+from importlib import reload
 
 
 
 if __name__ == "__main__":
+    
+    reload(mail)
     
     # ricevo la data formattata tramite lo script
     today = do.get_today_date()
@@ -17,7 +20,7 @@ if __name__ == "__main__":
     difference_between_dates = do.days(expiration) - do.days(today)
     
     # invio la email 
-    mail.send_mail(f'Ciao vecio! mancano {difference_between_dates} giorni a {expiration}.')
+    # mail.send(f'Ciao vecio! mancano {difference_between_dates} giorni a {expiration}.')
     
     print(f'tot is {difference_between_dates}')
     
@@ -49,3 +52,18 @@ if __name__ == "__main__":
     # nella funzione per il controllo dei giorni in scadenza è peresente un dizionario di cache per ottimizzare la memoria:
     # quando viene riscontrata una data, se non è presente nella cache viene inserita come chiave, mentre il suo valore è il risultato del calcolo
     # il risultato del calcolo viene già inserito nel dizionario dei dipendenti
+    
+    
+    output = ""
+    for nomi, corsi in corsi_in_scadenza.items():
+        output += f'Sono in scadenza per {nomi} i corsi: '
+        
+        for corso, giorni in corsi.items():
+            output += f'{corso} ({giorni} giorni), '
+            
+        output = output[:-2]
+        output += f'. \n'
+        
+    print(output)
+    mail.send(output)
+        
