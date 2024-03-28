@@ -13,16 +13,16 @@ if __name__ == "__main__":
     today = do.get_today_date()
     print(f'Oggi è il {today}.')  
     
-    # inserisco la data da cui calcolare i giorni rimasti 
-    expiration = input('expire dd/mm/yyyy: ')  
+    # >>>>>>>>>>>>>>> inserisco la data da cui calcolare i giorni rimasti 
+    # >>>>>>>>>>>>>>> expiration = input('expire dd/mm/yyyy: ')  
     
     
-    difference_between_dates = do.days(expiration) - do.days(today)
+    # difference_between_dates = do.days(expiration) - do.days(today)
     
     # invio la email 
-    # mail.send(f'Ciao vecio! mancano {difference_between_dates} giorni a {expiration}.')
+    #mail.send(f'Ciao vecio! mancano {difference_between_dates} giorni a {expiration}.')
     
-    print(f'tot is {difference_between_dates}')
+    #   >>>>> print(f'tot is {difference_between_dates}')
     
     
     # cosa resa da fare: implementare la lettura dal file xlsx
@@ -62,7 +62,10 @@ if __name__ == "__main__":
             output += f'{corso} ({giorni} giorni), '
             
         output = output[:-2]
-        output += f'. \n'
+        output += f'. '
+        
+    
+        
         
     print(output)
     mail.send(output)
