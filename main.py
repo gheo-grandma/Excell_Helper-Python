@@ -8,6 +8,9 @@ if __name__ == "__main__":
     
     # ricevo la data formattata tramite lo script
     # today = do.get_today_date()
+    
+    # converto la data in interi
+    # do.days(today)
     # print(f'Oggi è il {today}.')  
     
     
