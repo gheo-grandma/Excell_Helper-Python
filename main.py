@@ -1,6 +1,7 @@
 import openpyxl                             # modulo per leggere excel .xlsx (solo questo formato!)
 import dates_operations  as do              # script esterno creato per gestire le date
 import mail                                 # script esterno creato per login ed invio della email
+import csv_utility                          # script esterno creato per la gestione della lettura dei file csv
 
 
 
@@ -52,17 +53,23 @@ if __name__ == "__main__":
     
     
     output = "Buongiorno Eleonora ❤️ Sono in scadenza i seguenti corsi per i seguenti dipendenti:\n"
-    for nomi, corsi in corsi_in_scadenza.items():
-        output += f'- {nomi}: '
-        
-        for corso, giorni in corsi.items():
-            output += f'{corso} ({giorni} giorni alla scadenza), '
-            
-        output = output[:-2]
-        output += f'.\n'
-        
     
+    output_dictionary = csv_utility.parse_csv('csv_prova.csv', today)
+    
+    if output_dictionary:
+        for nomi, corsi in output_dictionary.items():
+            output += f'- {nomi}: '
+            
+            for corso, giorni in corsi.items():
+                output += f'{corso} ({giorni} giorni alla scadenza), '
+                
+            output = output[:-2]
+            output += f'.\n'
+            
+        # invia la mail solo se ci sono corsi da visualizzare, aka se il dizionario non è vuoto
+        print(output)
+        #mail.send(output)
         
         
     print(output)
-    mail.send(output)
+    #mail.send(output)

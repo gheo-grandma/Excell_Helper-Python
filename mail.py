@@ -1,5 +1,5 @@
-from smtplib import SMTP                    # modulo per email
-from email.mime.multipart import MIMEMultipart
+from smtplib import SMTP                            # modulo per email
+from email.mime.multipart import MIMEMultipart      # moduli per la formattazione del corpo della mail
 from email.mime.text import MIMEText
 
 
@@ -8,24 +8,25 @@ def send(body):
     sender_email = 'matthew.bonetto@gmail.com'
     receiver_email = 'bonetto.matteof@gmail.com'
     
-    # Create the email message
+    # creo la email in tutte le sue parti
     msg = MIMEMultipart()
     msg['From'] = sender_email
     msg['To'] = receiver_email
     msg['Subject'] = 'Corsi in scadenza'
     
-    # Attach the email body
+    # mi assicuro di allegare correttasmente la mail formattata come corpo
     msg.attach(MIMEText(body, 'plain'))
 
-    # Convert the email body to a string
+    # converto le info fornattate a stringa
     email_text = msg.as_string()
     
-    # address, port number
+    
+    # avvio il server per l'invio della mail
+    
     # questi valori cambiano insieme in base al servizio che viene usato
     server = SMTP('smtp.gmail.com', 587)
     
-    
-    # creao una connessione sicura con SSL o TLS
+    # creo una connessione sicura con SSL o TLS
     server.starttls()
     
     # username, password ( la password non è la stessa dell'account, bensì la password per le app terze parti generata apposta da google )
@@ -35,6 +36,6 @@ def send(body):
     server.sendmail(sender_email, receiver_email, email_text)
     
     
-    
+    # chiudo la connessione
     server.quit()
     print('Mail sent')
