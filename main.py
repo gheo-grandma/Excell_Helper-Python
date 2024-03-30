@@ -14,8 +14,11 @@ if __name__ == "__main__":
     # print(f'Oggi è il {today}.')  
     
     
-    output = "Buongiorno Eleonora ❤️ Sono in scadenza i seguenti corsi per i seguenti dipendenti:\n"
+    output = "Buongiorno Eleonora ❤️ Sono in scadenza i seguenti corsi per i seguenti dipendenti:\n\n"
     
+    # inserire qui funzione per avviare la conversione del file xslx in csv, passare poi il risultato a csv_utility.parse_csv()
+    
+    # conversione del file csv in dizionario con i vampi che rispettano le condizioni
     output_dictionary = csv_utility.parse_csv('csv_prova.csv')
     
     # se ci sono dati da visualizzare prepara il corpo della mail
@@ -27,11 +30,11 @@ if __name__ == "__main__":
                 output += f'{corso} ({giorni} giorni alla scadenza), '
                 
             output = output[:-2]
-            output += f'.\n'
+            output += f'.\n\n'
             
         # invia la mail solo se ci sono corsi da visualizzare, aka se il dizionario non è vuoto
-        print(output)
-        #mail.send(output)
+        # print(output)
+        mail.send(output)
         
     else:
         print('Nessun valore')
