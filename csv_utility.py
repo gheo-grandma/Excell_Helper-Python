@@ -1,12 +1,12 @@
 import csv
-import dates_operations as do
+import dates_operations  as do              # script esterno creato per gestire le date
 
 
-def parse_csv(filename, today_date):
+def parse_csv(filename):
     # nella funzione di parsing del csv, passo come parametri il file csv da leggere e la data di oggi
     
     # converto la data di oggi
-    today_days = do.days(today_date)
+    today_days = do.get_today_date()
     
     # creo un dizionario dei dipendenti
     employee_dic = {}
@@ -37,20 +37,22 @@ def parse_csv(filename, today_date):
                 
             # se la data specifica rientra nella condizione 'mancano meno di 160 giorni a tale data'
             # inserisco il corso nel dizionario dei corsi
+            # la struttura è quanto segue:
+            # dizionario dei corsi = { corso : giorni alla scadenza }
+            # dizionario dei dipendenti = { nome : { corso : gg, corso : gg }, nome : { corso : gg } }
+            # i dati vengono aggiunti al dizionario solo se non esistono già
+            
             if days_cache[line[3]] < 160 and days_cache[line[3]] > 0:
-                
                 if line[1] not in course_dic:
-                    #course_dic.update({line[1] : days_cache[line[3]]})
                     course_dic[line[1]] = days_cache[line[3]]
-                # else:
-                #     course_dic[line[1]] = days_cache[line[3]]
-                
+                    
                 if line[0] not in employee_dic:
-                    # employee_dic.update({line[0] : {line[1] : course_dic[line[1]]}})
-                    employee_dic[line[0]] = {line[1] : course_dic[line[1]]}
+                    employee_dic[line[0]] = {line[1]: course_dic[line[1]]}
                 else:
-                    # employee_dic[line[0]] = {line[1] : course_dic[line[1]]}
-                    employee_dic.update({line[0] : {line[1] : course_dic[line[1]]}})
+                    if line[1] not in employee_dic[line[0]]:
+                        employee_dic[line[0]][line[1]] = course_dic[line[1]]
+
                 
+        # ritorna il dizionario per permettere a main di proseguire con la mail
         return employee_dic       
         print(employee_dic)
