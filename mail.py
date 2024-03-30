@@ -7,6 +7,7 @@ def send(body):
     
     sender_email = 'matthew.bonetto@gmail.com'
     receiver_email = 'bonetto.matteof@gmail.com'
+    pw = 'uojtdczjuoetpuxg'
     
     # creo la email in tutte le sue parti
     msg = MIMEMultipart()
@@ -30,12 +31,11 @@ def send(body):
     server.starttls()
     
     # username, password ( la password non è la stessa dell'account, bensì la password per le app terze parti generata apposta da google )
-    server.login(receiver_email, 'uojtdczjuoetpuxg')
+    server.login(receiver_email, pw)
     
     # sender, receiver, message
-    server.sendmail(sender_email, receiver_email, email_text)
+    server.sendmail(receiver_email, receiver_email, email_text)
     
     
     # chiudo la connessione
     server.quit()
-    print('Mail sent')
