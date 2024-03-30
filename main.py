@@ -1,13 +1,10 @@
 import openpyxl                             # modulo per leggere excel .xlsx (solo questo formato!)
 import dates_operations  as do              # script esterno creato per gestire le date
 import mail                                 # script esterno creato per login ed invio della email
-from importlib import reload
 
 
 
 if __name__ == "__main__":
-    
-    reload(mail)
     
     # ricevo la data formattata tramite lo script
     today = do.get_today_date()
@@ -69,4 +66,3 @@ if __name__ == "__main__":
         
     print(output)
     mail.send(output)
-        
