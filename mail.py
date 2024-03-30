@@ -1,13 +1,16 @@
 from smtplib import SMTP                            # modulo per email
 from email.mime.multipart import MIMEMultipart      # moduli per la formattazione del corpo della mail
 from email.mime.text import MIMEText
+from conf import Credentials                        # file con credenziali, mail e pw
 
 
 def send(body):
     
-    sender_email = 'matthew.bonetto@gmail.com'
-    receiver_email = 'bonetto.matteof@gmail.com'
-    pw = 'uojtdczjuoetpuxg'
+    mail_credentials = Credentials()
+    
+    sender_email = mail_credentials.get_sender()
+    receiver_email = mail_credentials.get_receiver()
+    pw = mail_credentials.get_pw()
     
     # creo la email in tutte le sue parti
     msg = MIMEMultipart()
