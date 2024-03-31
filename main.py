@@ -1,6 +1,40 @@
 import openpyxl                             # modulo per leggere excel .xlsx (solo questo formato!)
+from openpyxl import Workbook, load_workbook
 import mail                                 # script esterno creato per login ed invio della email
 import csv_utility                          # script esterno creato per la gestione della lettura dei file csv
+
+
+def load_xl():
+    book = load_workbook('Corsi_prova.xlsx')
+    sheet = book.active
+    
+    # ricevo le righe
+    data = sheet.rows
+    
+    # apro/creo il file csv
+    csv_file = open('csv_file.csv', 'w+')
+    
+    # leggo i dati
+    for row in data:
+        # salvo le celle della riga in una lista
+        l = list(row)
+        
+        # leggo ogni elemento nella riga e scrivo il rispettivo valore nel file
+        # se sono arrivato alla fine della riga, scrivo solo il valore, altrimenti aggiungo una virgola
+        # terminata la riga aggiungo \n
+        # chiudo il file quando ho finito
+        
+        for i in range(len(l)):
+            if i == len(l) - 1:
+                csv_file.write(str(l[i].value))
+            else:
+                csv_file.write(str(l[i].value) + ',')
+        csv_file.write('\n')
+        
+    csv_file.close()
+        
+    
+    print(sheet)
 
 
 
@@ -33,11 +67,14 @@ if __name__ == "__main__":
             output += f'.\n\n'
             
         # invia la mail solo se ci sono corsi da visualizzare, aka se il dizionario non è vuoto
-        # print(output)
-        mail.send(output)
+        # mail.send(output)
+        print('Mail sent')
         
     else:
         print('Nessun valore')
+        
+        
+    load_xl()
         
         
         
