@@ -1,9 +1,16 @@
 import openpyxl
 from openpyxl import Workbook, load_workbook
+import sys
+import os
 
 def convert_xl_to_csv(xl_filename, csv_filename):
     
-    book = load_workbook(xl_filename)
+    
+    # imposto il percorso del file excel 
+    # il file deve risiedere nel desktop in ogni momento
+    excel_file_path = os.path.expanduser(f"~/Desktop/{xl_filename}")
+    
+    book = load_workbook(excel_file_path)
     sheet = book.active
     
     # ricevo le righe
