@@ -6,13 +6,6 @@ import xlsx_utility                         # script esterno per convertire xlsx
 
 if __name__ == "__main__":
     
-    # ricevo la data formattata tramite lo script
-    # today = do.get_today_date()
-    
-    # converto la data in interi
-    # do.days(today)
-    # print(f'Oggi è il {today}.')
-    
     csv_file_name = 'corsi_csv.csv'
     xl_file_name = 'Corsi_xl.xlsx'  
     
