@@ -1,41 +1,7 @@
 import openpyxl                             # modulo per leggere excel .xlsx (solo questo formato!)
-from openpyxl import Workbook, load_workbook
 import mail                                 # script esterno creato per login ed invio della email
 import csv_utility                          # script esterno creato per la gestione della lettura dei file csv
-
-
-def load_xl():
-    book = load_workbook('Corsi_prova.xlsx')
-    sheet = book.active
-    
-    # ricevo le righe
-    data = sheet.rows
-    
-    # apro/creo il file csv
-    csv_file = open('csv_file.csv', 'w+')
-    
-    # leggo i dati
-    for row in data:
-        # salvo le celle della riga in una lista
-        l = list(row)
-        
-        # leggo ogni elemento nella riga e scrivo il rispettivo valore nel file
-        # se sono arrivato alla fine della riga, scrivo solo il valore, altrimenti aggiungo una virgola
-        # terminata la riga aggiungo \n
-        # chiudo il file quando ho finito
-        
-        for i in range(len(l)):
-            if i == len(l) - 1:
-                csv_file.write(str(l[i].value))
-            else:
-                csv_file.write(str(l[i].value) + ',')
-        csv_file.write('\n')
-        
-    csv_file.close()
-        
-    
-    print(sheet)
-
+import xlsx_utility                         # script esterno per convertire xlsx in csv
 
 
 if __name__ == "__main__":
@@ -45,15 +11,19 @@ if __name__ == "__main__":
     
     # converto la data in interi
     # do.days(today)
-    # print(f'Oggi è il {today}.')  
+    # print(f'Oggi è il {today}.')
+    
+    csv_file_name = 'corsi_csv.csv'
+    xl_file_name = 'Corsi_xl.xlsx'  
     
     
     output = "Buongiorno Eleonora ❤️ Sono in scadenza i seguenti corsi per i seguenti dipendenti:\n\n"
     
-    # inserire qui funzione per avviare la conversione del file xslx in csv, passare poi il risultato a csv_utility.parse_csv()
+    # avviare la conversione del file xslx in csv, passare poi il risultato a csv_utility.parse_csv()
+    xlsx_utility.convert_xl_to_csv(xl_file_name, csv_file_name)
     
     # conversione del file csv in dizionario con i vampi che rispettano le condizioni
-    output_dictionary = csv_utility.parse_csv('csv_prova.csv')
+    output_dictionary = csv_utility.parse_csv(csv_file_name)
     
     # se ci sono dati da visualizzare prepara il corpo della mail
     if output_dictionary:
@@ -67,14 +37,11 @@ if __name__ == "__main__":
             output += f'.\n\n'
             
         # invia la mail solo se ci sono corsi da visualizzare, aka se il dizionario non è vuoto
-        # mail.send(output)
+        mail.send(output)
         print('Mail sent')
         
     else:
         print('Nessun valore')
-        
-        
-    load_xl()
         
         
         
