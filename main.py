@@ -10,6 +10,7 @@ if __name__ == "__main__":
     xl_file_name = 'Corsi_xl.xlsx'  
     
     
+    
     output = "Buongiorno Eleonora ❤️ Sono in scadenza i seguenti corsi per i seguenti dipendenti:\n\n"
     
     # avviare la conversione del file xslx in csv, passare poi il risultato a csv_utility.parse_csv()
