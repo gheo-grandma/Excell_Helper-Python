@@ -23,9 +23,10 @@ def days(date):
         ]
  
     # dati presi dalla data
+    # gestione di casi in cui le date siano scritte in maniera diversa dal previsto
     if len(date) == 10:
         
-        ##/##/####
+        # dd/mm/yyyy
         dds = date[0] + date[1]
         mms = date[3] + date[4]
         yys = date[6] + date[7] + date[8] + date[9]
@@ -36,15 +37,26 @@ def days(date):
         yy = int(yys)
         
     elif len(date) == 7:
-        ##/####
-        mms = date[3] + date[4]
-        yys = date[6] + date[7] + date[8] + date[9]
+        # mm/yyyy
+        mms = date[0] + date[1]
+        yys = date[3] + date[4] + date[5] + date[6]
         
+        dd = 1
         mm = int(mms)
         yy = int(yys)
         
+    elif len(date) == 4:
+        # yyyy
+        yys = date[0] + date[1] + date[2] + date[3]
+        
+        dd = 1
+        mm = 1
+        yy = int(yys)
     
     
+    # formato della data errato
+    else:
+        return -1
 
     
     # per convertire le date in numero di giorni, seguiamo un algoritmo semplice
