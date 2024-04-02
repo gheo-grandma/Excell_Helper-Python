@@ -20,10 +20,6 @@ if __name__ == "__main__":
     # conversione del file csv in dizionario con i vampi che rispettano le condizioni
     output_dictionary = csv_utility.parse_csv(csv_file_name)
     
-    # tmp = do.get_today_date()
-    # print(f'Oggi è il {do.days(tmp)}')
-    
-    # a = input('Dajeeee')
     
     # se ci sono dati da visualizzare prepara il corpo della mail
     if output_dictionary:

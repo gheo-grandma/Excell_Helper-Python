@@ -23,14 +23,27 @@ def days(date):
         ]
  
     # dati presi dalla data
-    dds = date[0] + date[1]
-    mms = date[3] + date[4]
-    yys = date[6] + date[7] + date[8] + date[9]
+    if len(date) == 10:
+        
+        ##/##/####
+        dds = date[0] + date[1]
+        mms = date[3] + date[4]
+        yys = date[6] + date[7] + date[8] + date[9]
+        
+        # conversione dei dati in cifre (int)
+        dd = int(dds)
+        mm = int(mms)
+        yy = int(yys)
+        
+    elif len(date) == 7:
+        ##/####
+        mms = date[3] + date[4]
+        yys = date[6] + date[7] + date[8] + date[9]
+        
+        mm = int(mms)
+        yy = int(yys)
+        
     
-    # conversione dei dati in cifre (int)
-    dd = int(dds)
-    mm = int(mms)
-    yy = int(yys)
     
 
     
