@@ -9,6 +9,7 @@ if __name__ == "__main__":
     
     csv_file_name = 'corsi_csv.csv'
     xl_file_name = 'Corsi_xl.xlsx'  
+    # xl_file_name = 'prova_colonne_unite.xlsx'
     
     
     

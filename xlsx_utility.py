@@ -30,10 +30,15 @@ def convert_xl_to_csv(xl_filename, csv_filename):
         # chiudo il file quando ho finito
         
         for i in range(len(l)):
-            if i == len(l) - 1:
-                csv_file.write(str(l[i].value))
-            else:
-                csv_file.write(str(l[i].value) + ',')
+            string_to_write = ''
+            string_to_write = str(l[i].value)
+            
+            if i != len(l) - 1:
+                string_to_write += ','
+
+            csv_file.write(string_to_write)
+            string_to_write = ''
+            
         csv_file.write('\n')
         
     csv_file.close()
