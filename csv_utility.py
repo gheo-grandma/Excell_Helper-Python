@@ -62,3 +62,39 @@ def parse_csv(filename):
                 
         # ritorna il dizionario per permettere a main di proseguire con la mail
         return employee_dic       
+    
+    
+    
+def parse_formazione_csv(filename):
+    
+    # ricevo e converto la data di oggi
+    today_days = do.days(do.get_today_date())
+    
+    corsi = []
+    scadenze = []
+    
+    with open(filename, 'r') as csv_file:
+        csv_reader = csv.reader(csv_file)
+        
+        # le prime 3 righe sono vuote
+        next(csv_file)
+        next(csv_file)
+        next(csv_file)
+        
+        # leggo le righe del file
+        
+        for line in csv_reader:
+            for cell in line:
+                if cell != 'None':
+                    print(cell)
+            
+            # # salvo i corsi
+            # for cell in line:
+            #     if cell != '':
+            #         corsi.append(cell)
+                    
+        print(corsi)
+        
+    csv_file.close()
+        
+        
