@@ -34,7 +34,7 @@ def convert_xl_to_csv(xl_filename, csv_filename):
             string_to_write = str(l[i].value)
             
             if i != len(l) - 1:
-                string_to_write += ','
+                string_to_write += '|'
 
             csv_file.write(string_to_write)
             string_to_write = ''
