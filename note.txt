@@ -1,0 +1,25 @@
+per risolvere il file xlsx con formato nuovo:
+
+controllo la riga dei corsi
+ - - - - - - privacy - - - - - -  antincendio - - - - - HACCP 
+ dove - = cella vuota
+
+ quando una cella NON è vuota, aggiungo il suo valore ad una lista corsi
+ corsi = [privacy, antincendio, HACCP]
+
+
+controllo la riga delle date
+cognome, nome, 2021, ultimo aggiornamento, scadenza
+ scorrendo la riga delle date, cerco le date delle scadenze e ne salvo gli indici in una lista
+ scadenze = [10, 17]
+
+ scadenze = []
+
+# creo una lista con le row del csv
+rows = list(csv_reader)
+
+# leggo 
+expire_line = rows[indice della riga che contiene ]
+ for i in len(rows):
+    if i == "scadenza":
+        scadenze.append(i)

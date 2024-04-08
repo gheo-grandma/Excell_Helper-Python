@@ -8,15 +8,19 @@ import dates_operations as do
 if __name__ == "__main__":
     
     csv_file_name = 'corsi_csv.csv'
-    xl_file_name = 'Corsi_xl.xlsx'  
+    # xl_file_name = 'Corsi_xl.xlsx'  
     # xl_file_name = 'prova_colonne_unite.xlsx'
-    
-    
+    xl_file_name = 'FORMAZIONE OBBLIGATORIA (tutti i dip).xlsx'
     
     output = "Buongiorno Eleonora ❤️ Sono in scadenza i seguenti corsi per i seguenti dipendenti:\n\n"
     
     # avviare la conversione del file xslx in csv, passare poi il risultato a csv_utility.parse_csv()
     xlsx_utility.convert_xl_to_csv(xl_file_name, csv_file_name)
+    
+    print('Converted')
+    
+    csv_utility.parse_formazione_csv(csv_file_name)
+    exit()
     
     # conversione del file csv in dizionario con i vampi che rispettano le condizioni
     output_dictionary = csv_utility.parse_csv(csv_file_name)
