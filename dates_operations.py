@@ -26,10 +26,10 @@ def days(date):
     # gestione di casi in cui le date siano scritte in maniera diversa dal previsto
     if len(date) == 10:
         
-        # dd/mm/yyyy
-        dds = date[0] + date[1]
-        mms = date[3] + date[4]
-        yys = date[6] + date[7] + date[8] + date[9]
+        # yyyy/mm/dd
+        dds = date[8] + date[9]
+        mms = date[5] + date[6]
+        yys = date[0] + date[1] + date[2] + date[3]
         
         # conversione dei dati in cifre (int)
         dd = int(dds)
@@ -37,9 +37,9 @@ def days(date):
         yy = int(yys)
         
     elif len(date) == 7:
-        # mm/yyyy
-        mms = date[0] + date[1]
-        yys = date[3] + date[4] + date[5] + date[6]
+        # yyyy/mm
+        mms = date[5] + date[6]
+        yys = date[0] + date[1] + date[2] + date[3]
         
         dd = 1
         mm = int(mms)
@@ -86,6 +86,6 @@ def days(date):
 def get_today_date():
     # date is retrieved as yyyy-mm-dd
     temp = datetime.date.today()
-    formatted_date = temp.strftime('%d/%m/%Y')
+    formatted_date = temp.strftime('%Y-%m-%d')
     
     return formatted_date
