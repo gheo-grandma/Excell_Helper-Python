@@ -148,11 +148,5 @@ def parse_formazione_csv(filename):
         
     csv_file.close()
     
-    print(scadenze)
-    
-    for i in corsi:
-        print(i)
-
-    
     return dipendenti
         

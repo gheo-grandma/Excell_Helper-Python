@@ -15,7 +15,7 @@ if __name__ == "__main__":
     output = "Buongiorno Eleonora ❤️ Sono in scadenza i seguenti corsi per i seguenti dipendenti:\n\n"
     
     # avviare la conversione del file xslx in csv, passare poi il risultato a csv_utility.parse_csv()
-    #xlsx_utility.convert_xl_to_csv(xl_file_name, csv_file_name)
+    xlsx_utility.convert_xl_to_csv(xl_file_name, csv_file_name)
     
     print('Converted')
     
