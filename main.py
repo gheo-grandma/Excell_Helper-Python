@@ -8,8 +8,6 @@ import dates_operations as do
 if __name__ == "__main__":
     
     csv_file_name = 'corsi_csv.csv'
-    # xl_file_name = 'Corsi_xl.xlsx'  
-    # xl_file_name = 'prova_colonne_unite.xlsx'
     xl_file_name = 'FORMAZIONE OBBLIGATORIA (tutti i dip).xlsx'
     
     output = "Buongiorno Eleonora ❤️ Sono in scadenza i seguenti corsi per i seguenti dipendenti:\n\n"
