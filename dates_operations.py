@@ -24,39 +24,52 @@ def days(date):
  
     # dati presi dalla data
     # gestione di casi in cui le date siano scritte in maniera diversa dal previsto
-    if len(date) == 10:
+    match len(date): 
         
-        # yyyy/mm/dd
-        dds = date[8] + date[9]
-        mms = date[5] + date[6]
-        yys = date[0] + date[1] + date[2] + date[3]
-        
-        # conversione dei dati in cifre (int)
-        dd = int(dds)
-        mm = int(mms)
-        yy = int(yys)
-        
-    elif len(date) == 7:
-        # yyyy/mm
-        mms = date[5] + date[6]
-        yys = date[0] + date[1] + date[2] + date[3]
-        
-        dd = 1
-        mm = int(mms)
-        yy = int(yys)
-        
-    elif len(date) == 4:
-        # yyyy
-        yys = date[0] + date[1] + date[2] + date[3]
-        
-        dd = 1
-        mm = 1
-        yy = int(yys)
+        # 2019-12-01 00:00:00
+        case 19:
+            # yyyy/mm/dd
+            dds = date[8] + date[9]
+            mms = date[5] + date[6]
+            yys = date[0] + date[1] + date[2] + date[3]
+            
+            # conversione dei dati in cifre (int)
+            dd = int(dds)
+            mm = int(mms)
+            yy = int(yys)
+            
+        case 10:
+            # yyyy/mm/dd
+            dds = date[8] + date[9]
+            mms = date[5] + date[6]
+            yys = date[0] + date[1] + date[2] + date[3]
+            
+            # conversione dei dati in cifre (int)
+            dd = int(dds)
+            mm = int(mms)
+            yy = int(yys)
+            
+        # case 7:
+        #     # yyyy/mm
+        #     mms = date[5] + date[6]
+        #     yys = date[0] + date[1] + date[2] + date[3]
+            
+        #     dd = 1
+        #     mm = int(mms)
+        #     yy = int(yys)
+            
+        # case 4:
+        #     # yyyy
+        #     yys = date[0] + date[1] + date[2] + date[3]
+            
+        #     dd = 1
+        #     mm = 1
+        #     yy = int(yys)
     
     
-    # formato della data errato
-    else:
-        return -1
+        # formato della data errato
+        case _:
+            return -1
 
     
     # per convertire le date in numero di giorni, seguiamo un algoritmo semplice

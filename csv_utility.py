@@ -70,31 +70,80 @@ def parse_formazione_csv(filename):
     # ricevo e converto la data di oggi
     today_days = do.days(do.get_today_date())
     
+    # tutti i corsi in ordine da sx a dx
     corsi = []
+    
+    # gli indici delle colonne in cui si trovano i vari corsi in ordine da sx a dx
     scadenze = []
     
+    # la scadenza del corso corsi[x] si troverà nella colonna scadenze[x] nella riga del dipendente a
+    
+    
+    
+    # creo una cache per non calcolare più volte la stessa data
+    days_cache = {}
+    
+    # creo i vari dizionari
+    corsi_dipendente = {}
+    dipendenti = {}
+    
     with open(filename, 'r') as csv_file:
-        csv_reader = csv.reader(csv_file)
+        csv_reader = csv.reader(csv_file, delimiter = '|')
         
-        # le prime 3 righe sono vuote
-        next(csv_file)
-        next(csv_file)
-        next(csv_file)
+        # con questa variabile posso determinare in quale riga mi trovo
+        line_counter = 0
         
         # leggo le righe del file
-        
         for line in csv_reader:
-            for cell in line:
-                if cell != 'None':
-                    print(cell)
-            
-            # # salvo i corsi
-            # for cell in line:
-            #     if cell != '':
-            #         corsi.append(cell)
+        
+            match line_counter - 3:                 
+            # salvo i corsi
+                case 0:
+                    for i in range(len(line)):
+                        if line[i] != 'None':
+                            corsi.append(line[i])
+                            
+                # salvo gli indici delle scadenze
+                case 1:
+                    for i in range(len(line)):
+                        if line[i] == 'SCADENZA AGGIORNAMENTO':
+                            scadenze.append(i)
+                            
+                # leggo ora i dati dei dipendenti
+                case _:
+                    name = line[0]
                     
-        print(corsi)
+                    # scorro tra le scadenze
+                    for i in range(len(scadenze)):
+                        s = scadenze[i]
+                        
+                        temp_corso = {}
+                        
+                        # se è scritto un valore
+                        if line[s] != 'None':
+                            
+                            # aggiorno la chache dei giorni se mancano
+                            if s not in days_cache:
+                                days_cache.update({line[s] : line[s]})
+                            
+                            # procedo con il json solo se la condizione è valida
+                            if True:
+                                
+                                # aggiorno il corso per il dipendente
+                                if corsi[i] not in temp_corso:
+                                    temp_corso.update({corsi[i] : days_cache[line[s]]})
+                                    
+                                # aggiorno i dipendenti con i corsi
+                                if name not in dipendenti:
+                                    dipendenti.update({name : temp_corso})
+                                else:
+                                    dipendenti[line[0]][corsi[i]] = days_cache[line[s]]
+                                        
+                            
+            line_counter += 1
         
     csv_file.close()
-        
+    
+    # print(f'dipendenti: {dipendenti}')
+    return dipendenti
         

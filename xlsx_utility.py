@@ -2,6 +2,7 @@ import openpyxl
 from openpyxl import Workbook, load_workbook
 import sys
 import os
+import datetime
 
 def convert_xl_to_csv(xl_filename, csv_filename):
     
@@ -10,7 +11,7 @@ def convert_xl_to_csv(xl_filename, csv_filename):
     # il file deve risiedere nel desktop in ogni momento
     excel_file_path = os.path.expanduser(f"~/Desktop/{xl_filename}")
     
-    book = load_workbook(excel_file_path)
+    book = load_workbook(excel_file_path, data_only=True)
     sheet = book.active
     
     # ricevo le righe
@@ -18,6 +19,7 @@ def convert_xl_to_csv(xl_filename, csv_filename):
     
     # apro/creo il file csv
     csv_file = open(csv_filename, 'w+')
+    
     
     # leggo i dati
     for row in data:
@@ -41,7 +43,8 @@ def convert_xl_to_csv(xl_filename, csv_filename):
             
         csv_file.write('\n')
         
-    csv_file.close()
-        
     
     print(f'Worksheet = {sheet}')
+
+            
+    csv_file.close()
