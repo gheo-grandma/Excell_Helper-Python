@@ -1,5 +1,6 @@
 import csv
 import dates_operations  as do              # script esterno creato per gestire le date
+import save_course                          # script esterno per rendere più leggibile il nome del corso
 
 
 def parse_csv(filename):
@@ -100,7 +101,7 @@ def parse_formazione_csv(filename):
             # salvo i corsi
                 case 0:
                     for i in range(len(line)):
-                        if line[i] != 'None':
+                        if line[i] != 'None' and line[i] != 'GENERALE':
                             corsi.append(line[i])
                             
                 # salvo gli indici delle scadenze
@@ -129,7 +130,7 @@ def parse_formazione_csv(filename):
                             # procedo con il json solo se la condizione è valida
                             remainig_days = days_cache[line[s]]
                             if remainig_days <= 120 and remainig_days > 0:
-                                corso = corsi[i]
+                                corso = save_course.prettify_course(corsi[i])
                                 
                                 # aggiorno il corso per il dipendente
                                 if corso not in temp_corso:
@@ -145,6 +146,12 @@ def parse_formazione_csv(filename):
             line_counter += 1
         
     csv_file.close()
+    
+    print(scadenze)
+    
+    for i in corsi:
+        print(i)
+
     
     return dipendenti
         

@@ -15,15 +15,16 @@ if __name__ == "__main__":
     output = "Buongiorno Eleonora ❤️ Sono in scadenza i seguenti corsi per i seguenti dipendenti:\n\n"
     
     # avviare la conversione del file xslx in csv, passare poi il risultato a csv_utility.parse_csv()
-    # xlsx_utility.convert_xl_to_csv(xl_file_name, csv_file_name)
+    #xlsx_utility.convert_xl_to_csv(xl_file_name, csv_file_name)
     
     print('Converted')
     
-    csv_utility.parse_formazione_csv(csv_file_name)
-    exit()
-    
     # conversione del file csv in dizionario con i vampi che rispettano le condizioni
-    output_dictionary = csv_utility.parse_csv(csv_file_name)
+    output_dictionary = csv_utility.parse_formazione_csv(csv_file_name)
+    
+    
+
+    # output_dictionary = csv_utility.parse_csv(csv_file_name)      # old
     
     
     # se ci sono dati da visualizzare prepara il corpo della mail
@@ -65,13 +66,13 @@ if __name__ == "__main__":
     # creao un dizionario: {nome_dipendente : {nome_del_corso : giorni rimasti alla scadeza}}
     # esempio:
     # corsi_in_scadenza = {
-    #     'Matteo Bonetto' : {
+    #     'Gino Bernardo' : {
     #         'transpallet elettrico' : 126,
     #         'scaffali' : 154,
     #         'cassa' : 67
     #     },
         
-    #     'Eleonora Mori' : {
+    #     'Brino Lolletto' : {
     #         'scaffali' : 154,
     #         'sicurezza' : 139
     #     } 
