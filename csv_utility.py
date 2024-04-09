@@ -124,7 +124,7 @@ def parse_formazione_csv(filename):
                             
                             # aggiorno la chache dei giorni se mancano
                             if s not in days_cache:
-                                days_cache.update({line[s] : do.days(line[s])})
+                                days_cache.update({line[s] : do.days(line[s]) - today_days})
                             
                             # procedo con il json solo se la condizione è valida
                             remainig_days = days_cache[line[s]]
@@ -146,7 +146,5 @@ def parse_formazione_csv(filename):
         
     csv_file.close()
     
-    print(f'days: {days_cache}')
-    print(f'dipendenti: {dipendenti}')
     return dipendenti
         
