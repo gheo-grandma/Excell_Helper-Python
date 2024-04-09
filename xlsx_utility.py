@@ -1,8 +1,6 @@
 import openpyxl
 from openpyxl import Workbook, load_workbook
-import sys
 import os
-import datetime
 
 def convert_xl_to_csv(xl_filename, csv_filename):
     
@@ -41,8 +39,7 @@ def convert_xl_to_csv(xl_filename, csv_filename):
             csv_file.write(string_to_write)
             string_to_write = ''
             
-        csv_file.write('\n')
-        
+        csv_file.write('\n')        
     
     print(f'Worksheet = {sheet}')
 

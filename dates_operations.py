@@ -1,4 +1,5 @@
 import datetime             # modulo per la data di oggi
+import re
 
 
 # datetime:
@@ -16,6 +17,10 @@ def days(date):
     # Questa funzione serve a convertire la data in numero di giorni dall'anno 0.
     # Questa variabile servirà poi per calcolare la differenza tra due date espressa in giorni.
 
+    # regular expression per determinare se la data inserita non è valida i.e. una stringa di testo come "da fare" o "capire"
+    pattern = re.compile("[a-zA-Z]")
+    if pattern.match(date):
+        return -1
 
     # lista con il numero di giorni per ciascun mese
     calender = [
@@ -28,7 +33,7 @@ def days(date):
         
         # 2019-12-01 00:00:00
         case 19:
-            # yyyy/mm/dd
+            # yyyy/mm/dd hh:mm:ss
             dds = date[8] + date[9]
             mms = date[5] + date[6]
             yys = date[0] + date[1] + date[2] + date[3]
@@ -44,27 +49,26 @@ def days(date):
             mms = date[5] + date[6]
             yys = date[0] + date[1] + date[2] + date[3]
             
-            # conversione dei dati in cifre (int)
             dd = int(dds)
             mm = int(mms)
             yy = int(yys)
             
-        # case 7:
-        #     # yyyy/mm
-        #     mms = date[5] + date[6]
-        #     yys = date[0] + date[1] + date[2] + date[3]
+        case 7:
+            # yyyy/mm
+            mms = date[5] + date[6]
+            yys = date[0] + date[1] + date[2] + date[3]
             
-        #     dd = 1
-        #     mm = int(mms)
-        #     yy = int(yys)
+            dd = 1
+            mm = int(mms)
+            yy = int(yys)
             
-        # case 4:
-        #     # yyyy
-        #     yys = date[0] + date[1] + date[2] + date[3]
+        case 4:
+            # yyyy
+            yys = date[0] + date[1] + date[2] + date[3]
             
-        #     dd = 1
-        #     mm = 1
-        #     yy = int(yys)
+            dd = 1
+            mm = 1
+            yy = int(yys)
     
     
         # formato della data errato

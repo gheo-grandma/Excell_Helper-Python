@@ -124,26 +124,29 @@ def parse_formazione_csv(filename):
                             
                             # aggiorno la chache dei giorni se mancano
                             if s not in days_cache:
-                                days_cache.update({line[s] : line[s]})
+                                days_cache.update({line[s] : do.days(line[s])})
                             
                             # procedo con il json solo se la condizione è valida
-                            if True:
+                            remainig_days = days_cache[line[s]]
+                            if remainig_days <= 120 and remainig_days > 0:
+                                corso = corsi[i]
                                 
                                 # aggiorno il corso per il dipendente
-                                if corsi[i] not in temp_corso:
-                                    temp_corso.update({corsi[i] : days_cache[line[s]]})
+                                if corso not in temp_corso:
+                                    temp_corso.update({corso : remainig_days})
                                     
                                 # aggiorno i dipendenti con i corsi
                                 if name not in dipendenti:
                                     dipendenti.update({name : temp_corso})
                                 else:
-                                    dipendenti[line[0]][corsi[i]] = days_cache[line[s]]
+                                    dipendenti[line[0]][corso] = remainig_days
                                         
                             
             line_counter += 1
         
     csv_file.close()
     
-    # print(f'dipendenti: {dipendenti}')
+    print(f'days: {days_cache}')
+    print(f'dipendenti: {dipendenti}')
     return dipendenti
         
